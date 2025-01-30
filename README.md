@@ -11,6 +11,8 @@ npm install
 composer run dev
 ```
 
+go to [http://127.0.0.1:8000/login](http://127.0.0.1:8000/login)
+
 ## Accounts
 
 ### Admin
