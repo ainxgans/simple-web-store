@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('/products', ProductController::class)->middleware('role:admin');
     Route::post('/products/import', [ProductController::class, 'import'])->name('products.import')->middleware('role:admin');
+    Route::resource('/carts', CartController::class);
 });
 
 require __DIR__ . '/auth.php';

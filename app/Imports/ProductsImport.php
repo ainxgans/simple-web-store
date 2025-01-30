@@ -20,6 +20,7 @@ class ProductsImport implements ToModel, WithHeadingRow
             'description' => $row['description'],
             'price' => $row['price'],
             'stock' => $row['stock'],
+            'image' => $row['image'],
         ]);
     }
 }

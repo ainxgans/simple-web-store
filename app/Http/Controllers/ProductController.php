@@ -26,14 +26,26 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'stock' => 'required|numeric',
-        ]);
-        Product::create($validated);
-        return redirect()->route('products.index')->with('success', 'Product created successfully');
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'required|string|max:255',
+                'price' => 'required|numeric',
+                'stock' => 'required|numeric',
+            ]);
+            if ($request->hasFile('image')) {
+                $path = $request->file('image')->store('images');
+                if ($path) {
+                    $validated['image'] = $path;
+                } else {
+                    throw new \Exception('Failed to upload image');
+                }
+            }
+            Product::create($validated);
+            return redirect()->route('products.index')->with('success', 'Product created successfully');
+        } catch (\Exception $e) {
+            return redirect()->route('products.index')->with('error', 'Failed to create product: ' . $e->getMessage());
+        }
     }
 
     public function import(Request $request)

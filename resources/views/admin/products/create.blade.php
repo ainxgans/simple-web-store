@@ -14,30 +14,38 @@
                             {{ __('Add Product') }}
                         </h2>
                     </header>
-                    <form action="{{route('products.store')}}" method="post" class="mt-6 space-y-6">
+                    <form action="{{route('products.store')}}" method="post" class="mt-6 space-y-6"
+                          enctype="multipart/form-data">
                         @csrf
                         <div>
-                            <x-input-label for="name" :value="__('Name')" />
-                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" required autofocus/>
-                            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                            <x-input-label for="name" :value="__('Name')"/>
+                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" required
+                                          autofocus/>
+                            <x-input-error class="mt-2" :messages="$errors->get('name')"/>
                         </div>
 
                         <div>
-                            <x-input-label for="description" :value="__('Description')" />
-                            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full" required/>
-                            <x-input-error class="mt-2" :messages="$errors->get('description')" />
+                            <x-input-label for="description" :value="__('Description')"/>
+                            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full"
+                                          required/>
+                            <x-input-error class="mt-2" :messages="$errors->get('description')"/>
                         </div>
 
                         <div>
-                            <x-input-label for="price" :value="__('Price')" />
+                            <x-input-label for="price" :value="__('Price')"/>
                             <x-text-input id="price" name="price" type="number" class="mt-1 block w-full" required/>
-                            <x-input-error class="mt-2" :messages="$errors->get('price')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('price')"/>
                         </div>
 
                         <div>
-                            <x-input-label for="stock" :value="__('Stock')" />
+                            <x-input-label for="stock" :value="__('Stock')"/>
                             <x-text-input id="stock" name="stock" type="number" class="mt-1 block w-full" required/>
-                            <x-input-error class="mt-2" :messages="$errors->get('stock')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('stock')"/>
+                        </div>
+                        <div>
+                            <x-input-label for="image" :value="__('Image')"/>
+                            <x-text-input id="image" name="image" type="file" class="mt-1 block w-full" required/>
+                            <x-input-error class="mt-2" :messages="$errors->get('image')"/>
                         </div>
 
                         <x-primary-button>{{ __('Add') }}</x-primary-button>
