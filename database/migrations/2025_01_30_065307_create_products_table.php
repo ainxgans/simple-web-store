@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+        DB::statement('DROP TABLE IF EXISTS master.products CASCADE');
         Schema::dropIfExists('master.products');
         Schema::create('master.products', function (Blueprint $table) {
             $table->id();
@@ -20,6 +21,13 @@ return new class extends Migration {
 
     public function down(): void
     {
+        Schema::table('transactions.carts', function (Blueprint $table) {
+            $table->dropForeign(['product_id']);
+        });
+
+        Schema::table('transactions.order_items', function (Blueprint $table) {
+            $table->dropForeign(['product_id']);
+        });
         Schema::dropIfExists('master.products');
     }
 };

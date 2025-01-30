@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::dropIfExists('transactions.orders');
+        DB::statement('DROP TABLE IF EXISTS transactions.orders CASCADE');
         Schema::create('transactions.orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('master.users');
