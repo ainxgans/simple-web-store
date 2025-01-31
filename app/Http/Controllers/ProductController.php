@@ -34,7 +34,7 @@ class ProductController extends Controller
                 'stock' => 'required|numeric',
             ]);
             if ($request->hasFile('image')) {
-                $path = $request->file('image')->store('images');
+                $path = $request->file('image')->store('images', 'public');
                 if ($path) {
                     $validated['image'] = $path;
                 } else {
